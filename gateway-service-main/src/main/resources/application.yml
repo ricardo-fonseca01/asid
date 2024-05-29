@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: parents-route
+          uri: ${POSTS_ROUTE_URI:http://192.168.1.96:9090}
+          predicates:
+            - Path=/parents/**
+        - id: students-route
+          uri: ${COMMENTS_ROUTE_URI:http://192.168.1.96:9091}
+          predicates:
+            - Path=/students/**
+        - id: clubs-route
+          uri: ${COMMENTS_ROUTE_URI:http://192.168.1.96:9092}
+          predicates:
+            - Path=/clubs/**
+        - id: subjects-route
+          uri: ${COMMENTS_ROUTE_URI:http://192.168.1.96:9093}
+          predicates:
+            - Path=/subjects/**
+        - id: saga-route
+          uri: ${COMMENTS_ROUTE_URI:http://192.168.1.96:9094}
+          predicates:
+            - Path=/saga/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
